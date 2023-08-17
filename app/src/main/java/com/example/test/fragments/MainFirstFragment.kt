@@ -5,21 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.ProductAdapter
-import com.example.test.R
 import com.example.test.databinding.FragmentMainFirstBinding
 import com.example.test.net.DummyJSON.productApi
 import com.example.test.net.data.Products
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
-import okhttp3.internal.notifyAll
-import kotlin.coroutines.CoroutineContext
 
 
 class MainFirstFragment : Fragment() {
@@ -34,15 +29,17 @@ class MainFirstFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var products: Products = Products(mutableListOf(),0,0,0)
+        var products = Products(mutableListOf(),0,0,0)
         var skip = 0
-        var adapter: ProductAdapter = ProductAdapter(products)
+        var adapter = ProductAdapter(products)
 
         CoroutineScope(Dispatchers.IO).launch {
             products = getProducts(skip = skip)
             activity?.runOnUiThread {
                 adapter = ProductAdapter(products)
+                binding.centerPB.visibility = View.GONE
                 binding.firstFragmentProductRV.adapter = adapter
+                binding.firstFragmentProductRV.visibility = View.VISIBLE
                 skip += 10
             }
         }
@@ -54,10 +51,14 @@ class MainFirstFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
+                    binding.bottomPB.visibility = View.VISIBLE
                     CoroutineScope(Dispatchers.IO).launch {
                         products.products.addAll(getProducts(skip = skip).products)
                         skip += 10
-                        adapter.notifyItemRangeChanged(skip, products.products.size)
+                        activity?.runOnUiThread() {
+                            adapter.notifyItemRangeChanged(skip, products.products.size)
+                            binding.bottomPB.visibility = View.GONE
+                        }
                     }
                 }
             }
