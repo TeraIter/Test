@@ -1,9 +1,11 @@
 package com.example.test
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.test.databinding.ProductItemRvBinding
 import com.example.test.net.data.Products
 
@@ -21,9 +23,9 @@ class ProductAdapter(
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         holder.binding.apply {
             productTitle.text = products.products[position].title
-            productDesc.text = products.products[position].description
             productPrice.text = products.products[position].price.toString()
             productId.text = products.products[position].id.toString()
+            Glide.with(productImage).load(products.products[position].thumbnail).into(productImage)
         }
     }
 

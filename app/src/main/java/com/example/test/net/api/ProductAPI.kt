@@ -11,5 +11,9 @@ interface ProductAPI {
     suspend fun getById(@Path("id") id: Int): Product
 
     @GET("products")
-    suspend fun getAllWithParam(@Query("limit") limit: Int, @Query("skip") skip: Int): Products
+    suspend fun getAllWithParam(
+        @Query("limit") limit: Int,
+        @Query("skip") skip: Int,
+        @Query("select") select: List<String>
+    ): Products
 }

@@ -70,8 +70,8 @@ class MainFirstFragment : Fragment() {
 
     }
 
-    private suspend fun getProducts(limit: Int = 10, skip: Int): Products {
-        return productApi.getAllWithParam(limit, skip)
+    private suspend fun getProducts(limit: Int = 10, skip: Int, select: List<String> = listOf()): Products {
+        return productApi.getAllWithParam(limit, skip, select)
     }
 
 }
