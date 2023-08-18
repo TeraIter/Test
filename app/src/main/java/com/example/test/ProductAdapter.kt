@@ -25,6 +25,7 @@ class ProductAdapter(
             productTitle.text = products.products[position].title
             productPrice.text = products.products[position].price.toString()
             productId.text = products.products[position].id.toString()
+            productCategory.text = products.products[position].category
             Glide.with(productImage).load(products.products[position].thumbnail).into(productImage)
         }
     }

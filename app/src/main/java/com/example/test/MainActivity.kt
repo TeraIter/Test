@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.page_home -> {
+                R.id.page_store -> {
                     changeScreen(firstFragment)
                     true
                 }
-                R.id.page_chat -> {
+                R.id.page_cart -> {
                     changeScreen(secondFragment)
                     true
                 }

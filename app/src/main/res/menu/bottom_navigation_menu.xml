@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_home"
+        android:id="@+id/page_store"
         android:enabled="true"
-        android:icon="@drawable/baseline_home_24"
-        android:title="Home" />
+        android:icon="@drawable/selector_store"
+        android:title="Store" />
     <item
-        android:id="@+id/page_chat"
+        android:id="@+id/page_cart"
         android:enabled="true"
-        android:icon="@drawable/baseline_chat_24"
-        android:title="Chat" />
+        android:icon="@drawable/selector_cart"
+        android:title="Cart" />
     <item
         android:id="@+id/page_profile"
         android:enabled="true"
-        android:icon="@drawable/baseline_account_circle_24"
+        android:icon="@drawable/selector_account"
         android:title="Profile" />
 </menu>
