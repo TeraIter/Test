@@ -2,6 +2,7 @@ package com.example.test.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ class MainFirstFragment : Fragment() {
                 adapter = ProductAdapter(products)
                 binding.centerPB.visibility = View.GONE
                 binding.firstFragmentProductRV.adapter = adapter
+                binding.firstFragmentProductRV.layoutManager = LinearLayoutManager(context)
                 binding.firstFragmentProductRV.visibility = View.VISIBLE
                 skip += 10
             }
@@ -51,16 +53,21 @@ class MainFirstFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
-                    binding.bottomPB.visibility = View.VISIBLE
+                    binding.firstFragmentProductRV.setScrollStateNew(0)
                     CoroutineScope(Dispatchers.IO).launch {
                         products.products.addAll(getProducts(skip = skip).products)
                         skip += 10
                         activity?.runOnUiThread() {
                             adapter.notifyItemRangeChanged(skip, products.products.size)
-                            binding.bottomPB.visibility = View.GONE
                         }
                     }
                 }
+            }
+
+            fun RecyclerView.setScrollStateNew(state: Int) {
+                val method = this::class.java.getDeclaredMethod("setScrollState", Int::class.java)
+                method.isAccessible = true
+                method.invoke(this, state)
             }
         }
 
