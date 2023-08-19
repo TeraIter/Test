@@ -12,8 +12,8 @@ interface ProductAPI {
 
     @GET("products")
     suspend fun getAllWithParam(
-        @Query("limit") limit: Int,
+        @Query("limit") limit: Int = 10,
         @Query("skip") skip: Int,
-        @Query("select") select: List<String>
+        @Query("select") select: List<String> = listOf("title", "price", "thumbnail", "category")
     ): Products
 }

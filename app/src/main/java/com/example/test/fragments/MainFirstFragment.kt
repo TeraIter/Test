@@ -46,14 +46,11 @@ class MainFirstFragment : Fragment() {
             }
         }
 
-        class ScrollState(
-            val context: Context
-        ): RecyclerView.OnScrollListener() {
+        class ScrollState: RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
 
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
-                    binding.firstFragmentProductRV.setScrollStateNew(0)
                     CoroutineScope(Dispatchers.IO).launch {
                         products.products.addAll(getProducts(skip = skip).products)
                         skip += 10
@@ -63,22 +60,16 @@ class MainFirstFragment : Fragment() {
                     }
                 }
             }
-
-            fun RecyclerView.setScrollStateNew(state: Int) {
-                val method = this::class.java.getDeclaredMethod("setScrollState", Int::class.java)
-                method.isAccessible = true
-                method.invoke(this, state)
-            }
         }
 
         binding.firstFragmentProductRV.layoutManager = LinearLayoutManager(activity)
-        binding.firstFragmentProductRV.addOnScrollListener(ScrollState(requireActivity()))
+        binding.firstFragmentProductRV.addOnScrollListener(ScrollState())
 
 
     }
 
-    private suspend fun getProducts(limit: Int = 10, skip: Int, select: List<String> = listOf()): Products {
-        return productApi.getAllWithParam(limit, skip, select)
+    private suspend fun getProducts(skip: Int): Products {
+        return productApi.getAllWithParam(skip = skip)
     }
 
 }
