@@ -14,10 +14,14 @@ import com.example.test.net.data.Products
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
 
 
 class MainFirstFragment : Fragment() {
     private lateinit var binding: FragmentMainFirstBinding
+    private lateinit var adapter: ProductAdapter
+    var skip = 0
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,19 +32,17 @@ class MainFirstFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        lateinit var products: Products
-        var skip = 0
-        lateinit var adapter: ProductAdapter
-
         CoroutineScope(Dispatchers.IO).launch {
-            products = getProducts(skip = skip)
+            if (!this@MainFirstFragment::adapter.isInitialized) {
+                adapter = ProductAdapter(getProducts(skip = skip), activity)
+                skip += 10
+            }
             activity?.runOnUiThread {
-                adapter = ProductAdapter(products, activity)
                 binding.centerPB.visibility = View.GONE
                 binding.firstFragmentProductRV.adapter = adapter
+                adapter.stateRestorationPolicy = StateRestorationPolicy.ALLOW
                 binding.firstFragmentProductRV.layoutManager = LinearLayoutManager(context)
                 binding.firstFragmentProductRV.visibility = View.VISIBLE
-                skip += 10
             }
         }
 
@@ -50,10 +52,10 @@ class MainFirstFragment : Fragment() {
 
                 if (!recyclerView.canScrollVertically(1) && newState==RecyclerView.SCROLL_STATE_IDLE) {
                     CoroutineScope(Dispatchers.IO).launch {
-                        products.products.addAll(getProducts(skip = skip).products)
+                        adapter.products.products.addAll(getProducts(skip).products)
                         skip += 10
                         activity?.runOnUiThread {
-                            adapter.notifyItemRangeChanged(skip, products.products.size)
+                            adapter.notifyItemRangeChanged(skip, adapter.products.products.size)
                         }
                     }
                 }
@@ -62,7 +64,6 @@ class MainFirstFragment : Fragment() {
 
         binding.firstFragmentProductRV.layoutManager = LinearLayoutManager(activity)
         binding.firstFragmentProductRV.addOnScrollListener(ScrollState())
-
 
     }
 

@@ -14,7 +14,7 @@ import com.example.test.fragments.ItemFragment
 import com.example.test.net.data.Products
 
 class ProductAdapter(
-    private val products: Products,
+    val products: Products,
     private val activity: FragmentActivity?
 ) : RecyclerView.Adapter<ProductAdapter.CustomViewHolder>() {
     private val itemType = 1
