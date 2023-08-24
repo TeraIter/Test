@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.denzcoskun.imageslider.models.SlideModel
 import com.example.test.databinding.FragmentProductBinding
 import com.example.test.net.DummyJSON
-import com.example.test.rv_adapters.ProductImagesAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,15 +27,14 @@ class ItemFragment(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var adapter: ProductImagesAdapter
-        binding.rvImages.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         CoroutineScope(Dispatchers.IO).launch {
             val product = DummyJSON.productApi.getById(itemId)
+            val imageList = ArrayList<SlideModel>()
+            product.images.forEach { imageList.add(SlideModel(it)) }
             activity?.runOnUiThread {
                 binding.progressBar2.progress = 50
-                adapter = ProductImagesAdapter(product.images)
-                binding.rvImages.adapter = adapter
+                binding.sliderImages.setImageList(imageList)
 
                 binding.apply {
                     productTitle.text = product.title

@@ -13,8 +13,8 @@ interface ProductAPI {
 
     @GET("products")
     suspend fun getAllWithParam(
-        @Query("limit") limit: Int = 10,
         @Query("skip") skip: Int,
-        @Query("select") select: List<String> = listOf("title", "price", "thumbnail", "category")
+        @Query("limit") limit: Int = 10,
+        @Query("select") select: List<String> = listOf("title", "price", "thumbnail", "category", "rating")
     ): Response<CompactProducts>
 }

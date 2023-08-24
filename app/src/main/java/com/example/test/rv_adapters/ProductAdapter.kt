@@ -46,6 +46,7 @@ class ProductAdapter(
                     productItemId.text = compactProducts.products[position]?.id.toString()
                     productItemCategory.text = compactProducts.products[position]?.category
                     Glide.with(productItemThumbnail).load(compactProducts.products[position]?.thumbnail).into(productItemThumbnail)
+                    productRating.rating = compactProducts.products[position]?.rating ?: 0.0F
                 }
             }
             is ProgressViewHolder -> {}

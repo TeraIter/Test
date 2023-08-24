@@ -32,14 +32,14 @@ class MainFirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         CoroutineScope(Dispatchers.IO).launch {
             if (!this@MainFirstFragment::adapter.isInitialized) {
-                adapter = ProductAdapter(getProducts(0, requireActivity()), requireActivity())
+                adapter = ProductAdapter(getProducts(0, activity), activity)
                 adapter.compactProducts.products.add(null)
                 adapter.stateRestorationPolicy = StateRestorationPolicy.ALLOW
             }
             activity?.runOnUiThread {
                 if (adapter.compactProducts.products.size > 1) {
                     if (!this@MainFirstFragment::scrollState.isInitialized) {
-                        scrollState = FirstFragScrollState(10, requireActivity(), adapter)
+                        scrollState = FirstFragScrollState(10, activity, adapter)
                     }
                     binding.firstFragmentProductRV.addOnScrollListener(scrollState)
                     binding.firstFragmentProductRV.adapter = adapter
