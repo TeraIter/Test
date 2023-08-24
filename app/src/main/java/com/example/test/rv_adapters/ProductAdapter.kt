@@ -11,10 +11,10 @@ import com.example.test.R
 import com.example.test.databinding.BottomProgressBarBinding
 import com.example.test.databinding.RvProductBinding
 import com.example.test.fragments.ItemFragment
-import com.example.test.net.data.Products
+import com.example.test.net.data.CompactProducts
 
 class ProductAdapter(
-    val products: Products,
+    val compactProducts: CompactProducts,
     private val activity: FragmentActivity?
 ) : RecyclerView.Adapter<ProductAdapter.CustomViewHolder>() {
     private val itemType = 1
@@ -40,12 +40,12 @@ class ProductAdapter(
         when(holder) {
             is DataViewHolder -> {
                 holder.binding.apply {
-                    CVproduct.setOnClickListener{changeFragment(products.products[position].id, activity)}
-                    productItemTitle.text = products.products[position].title
-                    productItemPrice.text = products.products[position].price.toString()
-                    productItemId.text = products.products[position].id.toString()
-                    productItemCategory.text = products.products[position].category
-                    Glide.with(productItemThumbnail).load(products.products[position].thumbnail).into(productItemThumbnail)
+                    CVproduct.setOnClickListener{changeFragment(compactProducts.products[position]?.id!!, activity)}
+                    productItemTitle.text = compactProducts.products[position]?.title
+                    productItemPrice.text = compactProducts.products[position]?.price.toString()
+                    productItemId.text = compactProducts.products[position]?.id.toString()
+                    productItemCategory.text = compactProducts.products[position]?.category
+                    Glide.with(productItemThumbnail).load(compactProducts.products[position]?.thumbnail).into(productItemThumbnail)
                 }
             }
             is ProgressViewHolder -> {}
@@ -54,11 +54,11 @@ class ProductAdapter(
     }
 
     override fun getItemCount(): Int {
-        return products.products.size + 1
+        return compactProducts.products.size
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (products.products.size > position) {
+        return if (compactProducts.products[position] != null) {
             itemType
         } else {
             progressBarType

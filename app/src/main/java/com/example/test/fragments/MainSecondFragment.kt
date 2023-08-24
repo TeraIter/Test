@@ -13,12 +13,12 @@ import kotlinx.coroutines.launch
 
 
 class MainSecondFragment : Fragment() {
-    lateinit var binding: FragmentMainSecondBinding
+    private lateinit var binding: FragmentMainSecondBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainSecondBinding.inflate(inflater)
         return binding.root
     }

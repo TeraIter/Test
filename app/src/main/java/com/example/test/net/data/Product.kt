@@ -15,8 +15,8 @@ data class Product(
 )
 
 
-data class Products(
-    var products: MutableList<Product>,
+data class CompactProducts(
+    var products: MutableList<Product?>,
     val total: Int,
     val skip: Int,
     val limit: Int

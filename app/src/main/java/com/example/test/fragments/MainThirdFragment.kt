@@ -9,12 +9,12 @@ import com.example.test.R
 import com.example.test.databinding.FragmentMainThirdBinding
 
 class MainThirdFragment : Fragment() {
-    lateinit var binding: FragmentMainThirdBinding
+    private lateinit var binding: FragmentMainThirdBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMainThirdBinding.inflate(inflater)
         return binding.root
     }
