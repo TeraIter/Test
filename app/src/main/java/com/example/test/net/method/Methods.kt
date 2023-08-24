@@ -9,7 +9,7 @@ import java.net.UnknownHostException
 
 suspend fun getProducts(skip: Int, activity: FragmentActivity): CompactProducts {
     return try {
-        val response = DummyJSON.productApi.getAllWithParam(skip = skip)
+        val response = DummyJSON.productApi.getAllWithParam(skip)
 
         if (response.isSuccessful) {
             response.body()!!
