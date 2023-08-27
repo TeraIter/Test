@@ -7,6 +7,11 @@ import com.example.test.databinding.ActivityMainBinding
 import com.example.test.fragments.MainFirstFragment
 import com.example.test.fragments.MainSecondFragment
 import com.example.test.fragments.MainThirdFragment
+import com.example.test.fragments.ProfileFragment
+import com.example.test.room.DB
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +36,16 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.page_profile -> {
-                    changeScreen(thirdFragment)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val user = DB.getDB(applicationContext).dao.getUser().getOrNull(0)
+                        runOnUiThread {
+                            if (user == null) {
+                                changeScreen(thirdFragment)
+                            } else {
+                                changeScreen(ProfileFragment())
+                            }
+                        }
+                    }
                     true
                 }
                 else -> false

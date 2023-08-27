@@ -1,26 +1,12 @@
 package com.example.test.net
 
-import com.example.test.net.api.AccountAPI
-import com.example.test.net.api.ProductAPI
+import com.example.test.net.api.LoginDataApi
+import com.example.test.net.api.ProductApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
-object Retrofit {
-    private val interceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
-    private val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-
-    private val retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.8.100:8080")
-        .client(client)
-        .addConverterFactory(GsonConverterFactory.create()).build()
-
-    val accountApi = retrofit.create(AccountAPI::class.java)
-}
 
 object DummyJSON {
     private val interceptor = HttpLoggingInterceptor().apply {
@@ -33,5 +19,6 @@ object DummyJSON {
         .client(client)
         .addConverterFactory(GsonConverterFactory.create()).build()
 
-    val productApi = retrofit.create(ProductAPI::class.java)
+    val productApi: ProductApi = retrofit.create(ProductApi::class.java)
+    val loginDataApi: LoginDataApi = retrofit.create(LoginDataApi::class.java)
 }
