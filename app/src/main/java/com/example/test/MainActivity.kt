@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.page_profile -> {
                     CoroutineScope(Dispatchers.IO).launch {
-                        val user = DB.getDB(applicationContext).dao.getUser().getOrNull(0)
+                        val user = DB.getDB(applicationContext).userDao.getUser().getOrNull(0)
                         runOnUiThread {
                             if (user == null) {
                                 changeScreen(thirdFragment)

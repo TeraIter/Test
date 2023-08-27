@@ -38,7 +38,7 @@ class MainThirdFragment : Fragment() {
                 val user = loginDataApi.login(LoginData(username, password))
                 if (user.isSuccessful) {
                     val tableUser = TableUser(user.body()!!)
-                    db.dao.upsertUser(tableUser)
+                    db.userDao.upsertUser(tableUser)
 
                     activity?.runOnUiThread {
                         activity?.supportFragmentManager?.beginTransaction()?.apply {

@@ -11,5 +11,5 @@ import com.example.test.room.entities.TableUser
     version = 1
 )
 abstract class UserDatabase: RoomDatabase() {
-    abstract val dao: UserDao
+    abstract val userDao: UserDao
 }

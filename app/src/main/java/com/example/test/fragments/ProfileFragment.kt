@@ -30,7 +30,7 @@ class ProfileFragment : Fragment() {
         val db = DB.getDB(requireActivity().applicationContext)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val user = db.dao.getUser()[0]
+            val user = db.userDao.getUser()[0]
 
             activity?.runOnUiThread {
                 Glide.with(binding.imageIvProfile).load(user.image).into(binding.imageIvProfile)
@@ -39,7 +39,7 @@ class ProfileFragment : Fragment() {
 
                     CoroutineScope(Dispatchers.IO).launch {
 
-                        db.dao.deleteUser(user)
+                        db.userDao.deleteUser(user)
 
                         activity?.runOnUiThread {
                             activity?.supportFragmentManager?.beginTransaction()?.apply {
