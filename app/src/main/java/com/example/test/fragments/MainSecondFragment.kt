@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test.databinding.FragmentMainSecondBinding
+import com.example.test.net.DummyJSON.userCartApi
 import com.example.test.room.DB
+import com.example.test.rv_adapters.CartAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,7 +37,18 @@ class MainSecondFragment : Fragment() {
                 if (user == null) {
                     binding.notLoggedTv.visibility = View.VISIBLE
                 } else {
-                    binding.loggedOnTv.visibility = View.VISIBLE
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val adapter = CartAdapter(userCartApi.getUserCartById(user.idServer).carts.getOrNull(0), activity)
+                        activity?.runOnUiThread {
+                            if (adapter.itemCount > 0) {
+                                binding.userCartRv.adapter = adapter
+                                binding.userCartRv.layoutManager = LinearLayoutManager(context)
+                                binding.userCartRv.visibility = View.VISIBLE
+                            } else {
+                                binding.noItemsTv.visibility = View.VISIBLE
+                            }
+                        }
+                    }
                 }
 
                 binding.progressBar3.visibility = View.GONE

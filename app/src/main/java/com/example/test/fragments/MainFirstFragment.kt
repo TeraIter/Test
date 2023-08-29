@@ -46,7 +46,6 @@ class MainFirstFragment : Fragment() {
                     binding.centerPB.visibility = View.GONE
                     binding.firstFragmentProductRV.layoutManager = LinearLayoutManager(context)
                     binding.firstFragmentProductRV.visibility = View.VISIBLE
-                    binding.firstFragmentProductRV.layoutManager = LinearLayoutManager(activity)
                 } else {
                     binding.centerPB.visibility = View.GONE
                     binding.error.visibility = View.VISIBLE
