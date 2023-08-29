@@ -4,7 +4,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.example.test.net.DummyJSON
 import com.example.test.net.data.CompactProducts
-import java.net.UnknownHostException
+import java.io.IOException
 
 
 suspend fun getProducts(skip: Int, activity: FragmentActivity?): CompactProducts {
@@ -17,7 +17,7 @@ suspend fun getProducts(skip: Int, activity: FragmentActivity?): CompactProducts
             Toast.makeText(activity, "ERROR", Toast.LENGTH_SHORT).show()
             CompactProducts(mutableListOf(), 100, 10, 10)
         }
-    } catch (e: UnknownHostException) {
+    } catch (e: IOException) {
         CompactProducts(mutableListOf(), -1, 10, 10)
     }
 }

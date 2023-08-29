@@ -1,6 +1,7 @@
 package com.example.test.fragments
 
 import android.os.Bundle
+import android.text.method.PasswordTransformationMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,28 @@ class MainThirdFragment : Fragment() {
                         Toast.makeText(context, "Wrong info", Toast.LENGTH_SHORT).show()
                     }
                 }
+            }
+        }
+
+        binding.showPasswordCb.setOnClickListener {
+
+            binding.passwordEt.let { et ->
+
+                val start = et.selectionStart
+                val end = et.selectionEnd
+                if (binding.showPasswordCb.isChecked) {
+                    et.transformationMethod = null
+                } else {
+                    et.transformationMethod = PasswordTransformationMethod()
+                }
+                et.setSelection(start, end)
+            }
+        }
+
+        binding.tvNoAccount.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()?.apply {
+                replace(R.id.mainFrameLayout, RegisterFragment())
+                commit()
             }
         }
     }
