@@ -6,23 +6,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.denzcoskun.imageslider.models.SlideModel
-import com.example.test.databinding.FragmentProductBinding
+import com.example.test.databinding.ProductFragmentBinding
 import com.example.test.net.DummyJSON
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ItemFragment(
+class Product(
     private val itemId: Int
 ) : Fragment() {
-    private lateinit var binding: FragmentProductBinding
+    private lateinit var binding: ProductFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProductBinding.inflate(inflater)
+        binding = ProductFragmentBinding.inflate(inflater)
         return binding.root
     }
 

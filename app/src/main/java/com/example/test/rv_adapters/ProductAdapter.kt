@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.test.R
 import com.example.test.databinding.BottomProgressBarBinding
 import com.example.test.databinding.RvProductBinding
-import com.example.test.fragments.ItemFragment
+import com.example.test.fragments.Product
 import com.example.test.net.data.CompactProducts
 
 class ProductAdapter(
@@ -68,7 +68,7 @@ class ProductAdapter(
 
     private fun changeFragment(id: Int, activity: FragmentActivity?) {
         activity?.supportFragmentManager?.beginTransaction()?.apply {
-            replace(R.id.mainFrameLayout, ItemFragment(id))
+            replace(R.id.mainFrameLayout, Product(id))
             addToBackStack(null)
             commit()
         }

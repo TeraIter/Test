@@ -7,21 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.test.R
-import com.example.test.databinding.FragmentProfileBinding
+import com.example.test.databinding.ProfileAuthFragmentBinding
 import com.example.test.room.DB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ProfileFragment : Fragment() {
-    lateinit var binding: FragmentProfileBinding
+class ProfileAuth : Fragment() {
+    private lateinit var binding: ProfileAuthFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater)
+        binding = ProfileAuthFragmentBinding.inflate(inflater)
         return binding.root
     }
 
@@ -33,9 +33,11 @@ class ProfileFragment : Fragment() {
             val user = db.userDao.getUser()[0]
 
             activity?.runOnUiThread {
-                Glide.with(binding.imageIvProfile).load(user.image).into(binding.imageIvProfile)
-                binding.usernameTvProfile.text = user.username
-                binding.deleteUserBtn.setOnClickListener {
+                binding.nameProfileTv.text = user.name
+                binding.surnameProfileTv.text = user.surname
+
+
+                binding.exitProfileBtn.setOnClickListener {
 
                     CoroutineScope(Dispatchers.IO).launch {
 
@@ -43,7 +45,7 @@ class ProfileFragment : Fragment() {
 
                         activity?.runOnUiThread {
                             activity?.supportFragmentManager?.beginTransaction()?.apply {
-                                replace(R.id.mainFrameLayout, MainThirdFragment())
+                                replace(R.id.mainFrameLayout, ProfileNotAuth())
                                 commit()
                             }
                         }

@@ -4,10 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.test.databinding.ActivityMainBinding
-import com.example.test.fragments.MainFirstFragment
-import com.example.test.fragments.MainSecondFragment
-import com.example.test.fragments.MainThirdFragment
-import com.example.test.fragments.ProfileFragment
+import com.example.test.fragments.Store
+import com.example.test.fragments.Cart
+import com.example.test.fragments.ProfileNotAuth
+import com.example.test.fragments.ProfileAuth
 import com.example.test.room.DB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,9 +19,9 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val firstFragment = MainFirstFragment()
-        val secondFragment = MainSecondFragment()
-        val thirdFragment = MainThirdFragment()
+        val firstFragment = Store()
+        val secondFragment = Cart()
+        val thirdFragment = ProfileNotAuth()
 
         changeScreen(firstFragment)
 
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                             if (user == null) {
                                 changeScreen(thirdFragment)
                             } else {
-                                changeScreen(ProfileFragment())
+                                changeScreen(ProfileAuth())
                             }
                         }
                     }

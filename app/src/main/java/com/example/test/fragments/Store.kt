@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.test.rv_adapters.ProductAdapter
-import com.example.test.databinding.FragmentMainFirstBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import androidx.recyclerview.widget.RecyclerView.Adapter.StateRestorationPolicy
+import com.example.test.databinding.StoreFragmentBinding
 import com.example.test.net.method.getProducts
 import com.example.test.rv_adapters.scroll_states.FirstFragScrollState
 
 
-class MainFirstFragment : Fragment() {
-    private lateinit var binding: FragmentMainFirstBinding
+class Store : Fragment() {
+    private lateinit var binding: StoreFragmentBinding
     private lateinit var adapter: ProductAdapter
     private lateinit var scrollState: FirstFragScrollState
 
@@ -25,20 +25,20 @@ class MainFirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainFirstBinding.inflate(inflater)
+        binding = StoreFragmentBinding.inflate(inflater)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         CoroutineScope(Dispatchers.IO).launch {
-            if (!this@MainFirstFragment::adapter.isInitialized) {
+            if (!this@Store::adapter.isInitialized) {
                 adapter = ProductAdapter(getProducts(0, activity), activity)
                 adapter.compactProducts.products.add(null)
                 adapter.stateRestorationPolicy = StateRestorationPolicy.ALLOW
             }
             activity?.runOnUiThread {
                 if (adapter.compactProducts.products.size > 1) {
-                    if (!this@MainFirstFragment::scrollState.isInitialized) {
+                    if (!this@Store::scrollState.isInitialized) {
                         scrollState = FirstFragScrollState(10, activity, adapter)
                     }
                     binding.firstFragmentProductRV.addOnScrollListener(scrollState)

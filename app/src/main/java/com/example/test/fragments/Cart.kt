@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.test.databinding.FragmentMainSecondBinding
+import com.example.test.databinding.CartFragmentBinding
 import com.example.test.net.DummyJSON.userCartApi
 import com.example.test.room.DB
 import com.example.test.rv_adapters.CartAdapter
@@ -15,18 +15,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class MainSecondFragment : Fragment() {
-    private lateinit var binding: FragmentMainSecondBinding
+class Cart : Fragment() {
+    private lateinit var binding: CartFragmentBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMainSecondBinding.inflate(inflater)
+        binding = CartFragmentBinding.inflate(inflater)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    /*override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         CoroutineScope(Dispatchers.IO).launch {
             val user = DB.getDB(requireActivity().applicationContext).userDao.getUser().getOrNull(0)
@@ -54,5 +54,5 @@ class MainSecondFragment : Fragment() {
                 binding.progressBar3.visibility = View.GONE
             }
         }
-    }
+    }*/
 }

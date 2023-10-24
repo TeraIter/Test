@@ -5,73 +5,73 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.RegisterFragment">
+    tools:context=".fragments.Registry">
 
     <TextView
-        android:id="@+id/tvRegSurname"
+        android:id="@+id/surname_registry_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Surname:"
-        app:layout_constraintBottom_toTopOf="@+id/etRegSurname"
-        app:layout_constraintStart_toStartOf="@+id/etRegSurname" />
+        app:layout_constraintBottom_toTopOf="@+id/surname_registry_et"
+        app:layout_constraintStart_toStartOf="@+id/surname_registry_et" />
 
     <EditText
-        android:id="@+id/etRegName"
+        android:id="@+id/name_registry_et"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="text"
         android:hint="Name"
-        app:layout_constraintBottom_toTopOf="@+id/tvRegSurname"
-        app:layout_constraintEnd_toEndOf="@+id/etRegSurname"
+        app:layout_constraintBottom_toTopOf="@+id/surname_registry_tv"
+        app:layout_constraintEnd_toEndOf="@+id/surname_registry_et"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etRegSurname" />
+        app:layout_constraintStart_toStartOf="@+id/surname_registry_et" />
 
     <EditText
-        android:id="@+id/etRegEmail"
+        android:id="@+id/email_registry_et"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         android:hint="Email"
-        app:layout_constraintBottom_toTopOf="@+id/tvRegPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etRegPassword"
+        app:layout_constraintBottom_toTopOf="@+id/password_registry_tv"
+        app:layout_constraintEnd_toEndOf="@+id/password_registry_et"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etRegPassword" />
+        app:layout_constraintStart_toStartOf="@+id/password_registry_et" />
 
     <EditText
-        android:id="@+id/etRegSurname"
+        android:id="@+id/surname_registry_et"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginBottom="96dp"
         android:ems="10"
         android:inputType="text"
         android:hint="Surname"
-        app:layout_constraintBottom_toTopOf="@+id/tvRegEmail"
-        app:layout_constraintEnd_toEndOf="@+id/etRegEmail"
+        app:layout_constraintBottom_toTopOf="@+id/email_registry_tv"
+        app:layout_constraintEnd_toEndOf="@+id/email_registry_et"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/etRegEmail" />
+        app:layout_constraintStart_toStartOf="@+id/email_registry_et" />
 
     <EditText
-        android:id="@+id/etRegPassword"
+        android:id="@+id/password_registry_et"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginBottom="128dp"
         android:ems="10"
         android:inputType="textPassword"
         android:hint="Password"
-        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
-        app:layout_constraintEnd_toEndOf="@+id/btnRegister"
+        app:layout_constraintBottom_toTopOf="@+id/register_btn"
+        app:layout_constraintEnd_toEndOf="@+id/register_btn"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="@+id/btnRegister" />
+        app:layout_constraintStart_toStartOf="@+id/register_btn" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Registry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -79,26 +79,26 @@
         app:layout_constraintVertical_bias="0.859" />
 
     <TextView
-        android:id="@+id/tvRegName"
+        android:id="@+id/name_registry_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name:"
-        app:layout_constraintBottom_toTopOf="@+id/etRegName"
-        app:layout_constraintStart_toStartOf="@+id/etRegName" />
+        app:layout_constraintBottom_toTopOf="@+id/name_registry_et"
+        app:layout_constraintStart_toStartOf="@+id/name_registry_et" />
 
     <TextView
-        android:id="@+id/tvRegEmail"
+        android:id="@+id/email_registry_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email:"
-        app:layout_constraintBottom_toTopOf="@+id/etRegEmail"
-        app:layout_constraintStart_toStartOf="@+id/etRegEmail" />
+        app:layout_constraintBottom_toTopOf="@+id/email_registry_et"
+        app:layout_constraintStart_toStartOf="@+id/email_registry_et" />
 
     <TextView
-        android:id="@+id/tvRegPassword"
+        android:id="@+id/password_registry_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password:"
-        app:layout_constraintBottom_toTopOf="@+id/etRegPassword"
-        app:layout_constraintStart_toStartOf="@+id/etRegPassword" />
+        app:layout_constraintBottom_toTopOf="@+id/password_registry_et"
+        app:layout_constraintStart_toStartOf="@+id/password_registry_et" />
 </androidx.constraintlayout.widget.ConstraintLayout>
